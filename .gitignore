@@ -1,3 +1,9 @@
 # Ignore dataset folder
-train/
-train(2)/
+clean_balanced_data/
+clean_balanced_data_balanced/
+augmented_data_balanced_clean/
+augmented_balanced_data/
+combined/
+dataset_split/
+dataset_split_clean/
+split_data/
