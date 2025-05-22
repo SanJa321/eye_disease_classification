@@ -5,16 +5,30 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input
+import requests
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Load Keras model
-model = load_model("modelLast2_save.keras")
+# Define model path and (optional) download URL
+model_path = "modelLast2_save.keras"
+model_url = "https://drive.google.com/file/d/16zAOYXQUYFvBZazWrEITPcTDFcdKC0TC/view?usp=sharing"  # Replace with real link
+
+# Download the model if it's missing
+if not os.path.exists(model_path):
+    print("Model not found. Downloading...")
+    response = requests.get(model_url)
+    with open(model_path, "wb") as f:
+        f.write(response.content)
+    print("Model downloaded successfully.")
+
+# Load model
+model = load_model(model_path)
 
 # Define class labels
-class_labels = ['CNV', 'DME', 'Drusen', 'Normal', "not an oct image"]
+class_labels = ['CNV', 'DME', 'Drusen', 'Normal', 'not an oct image']
 
 @app.route('/')
 def home():
@@ -41,7 +55,7 @@ def predict():
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(file_path)
 
-    # Load and preprocess image
+    # Preprocess image
     img = image.load_img(file_path, target_size=(224, 224))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
