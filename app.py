@@ -16,7 +16,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Model configuration
 MODEL_PATH = "modelLast2_save.keras"
-MODEL_URL = "https://drive.google.com/file/d/16zAOYXQUYFvBZazWrEITPcTDFcdKC0TC/view?usp=drive_link"  # <-- Replace with actual public URL
+MODEL_URL = "https://drive.google.com/uc?export=download&id=16zAOYXQUYFvBZazWrEITPcTDFcdKC0TC"  # <-- Replace with actual public URL
 
 # Download model if not present
 if not os.path.exists(MODEL_PATH):
