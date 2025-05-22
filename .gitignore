@@ -1,11 +1,4 @@
-#Ignore a single file
-efficientNetTrain_model2.ipynb
-efficientNetTrain_model3.ipynb
-lastEfficient.ipynb
-lastEfficient2.ipynb
-lastEfficientModel.ipynb
-lastEfficientModel2.ipynb
-Nonoisdata.ipynb
+
 # Ignore dataset folder
 clean_balanced_data/
 clean_balanced_data_balanced/
@@ -15,4 +8,4 @@ combined/
 dataset_split/
 dataset_split_clean/
 split_data/
-
+train/
