@@ -1,5 +1,7 @@
-Flask
 Werkzeug
-tensorflow-cpu==2.12
+Pillow
+Flask
+tensorflow
 numpy
 Pillow
+gunicorn
