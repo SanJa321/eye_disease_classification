@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import os
+import requests
 from werkzeug.utils import secure_filename
 import numpy as np
 from tensorflow.keras.models import load_model
@@ -10,8 +11,23 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# Ensure the upload folder exists
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Model configuration
+MODEL_PATH = "modelLast2_save.keras"
+MODEL_URL = "https://drive.google.com/file/d/16zAOYXQUYFvBZazWrEITPcTDFcdKC0TC/view?usp=drive_link"  # <-- Replace with actual public URL
+
+# Download model if not present
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model from URL...")
+    response = requests.get(MODEL_URL)
+    with open(MODEL_PATH, "wb") as f:
+        f.write(response.content)
+    print("Model downloaded.")
+
 # Load Keras model
-model = load_model("modelLast2_save.keras")
+model = load_model(MODEL_PATH)
 
 # Define class labels
 class_labels = ['CNV', 'DME', 'Drusen', 'Normal', "not an oct image"]
