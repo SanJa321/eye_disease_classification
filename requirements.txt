@@ -1,5 +1,5 @@
 Flask
 Werkzeug
-tensorflow
+tensorflow-cpu==2.15
 numpy
 Pillow
